@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: cubeone-auth-staging
+    runtime: docker
+    dockerfilePath: ./cubeone-auth/Dockerfile
+    dockerContext: ./cubeone-auth
+    plan: starter
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: JWT_SECRET
+        sync: false
+
+  - type: web
+    name: cubeone-connector-staging
+    runtime: docker
+    dockerfilePath: ./connector/Dockerfile
+    dockerContext: ./connector
+    plan: starter
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: API_KEY
+        sync: false
+      - key: AUTH_JWT_SECRET
+        sync: false
+      - key: EVOLVESA_LEAD_TRIGGER_URL
+        sync: false
+      - key: EVOLVESA_LEAD_RECEIVING_ENTITY_ID
+        sync: false
+      - key: EVOLVESA_LEAD_RECEIVING_ENTITY_NAME
+        sync: false
+      - key: EVOLVESA_DEFAULT_LEAD_ANCILLARY_AREA
+        value: Gauteng
+      - key: EVOLVESA_DEFAULT_LEAD_USER_AREA
+        value: JHB
+      - key: TRUTRADE_API_KEY
+        sync: false
+      - key: TRUTRADE_API_SECRET
+        sync: false
+      - key: TRUTRADE_BASE_URL
+        value: https://api.yourvehiclevalue.co.za/api
